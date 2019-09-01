@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace policyInsurance.Api.Controllers
+namespace policyInsurance.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -14,14 +14,14 @@ namespace policyInsurance.Api.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "value1", "value3" };
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            return "value2";
         }
 
         // POST api/values
