@@ -7,5 +7,6 @@ namespace policyInsurance.Data.Models.Security
     {
         public int? Age { get; set; }
 
+        public virtual ICollection<policyInsurance.Data.Models.Policy.Policy> Policies { get; set; }
     }
 }

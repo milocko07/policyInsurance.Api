@@ -3,3 +3,13 @@
 ################################################################################
 
 /policyInsurance.Api/policyInsurance.Api/obj
+/policyInsurance.Api/policyInsurance.Data/obj
+/policyInsurance.Api/policyInsurance.Data/bin/Debug/netcoreapp2.2
+/policyInsurance.Api/policyInsurance.Api/bin/Debug/netcoreapp2.1
+/policyInsurance.Api/policyInsurance.Data/bin/Debug/netcoreapp2.1
+*.user
+/policyInsurance.Api/policyInsurance.Entities/bin/Debug/netcoreapp2.2
+/policyInsurance.Api/policyInsurance.Entities/obj/Debug/netcoreapp2.2
+/policyInsurance.Api/policyInsurance.Entities/obj
+/policyInsurance.Api/policyInsurance.WebApi/bin/Debug/netcoreapp2.2
+/policyInsurance.Api/policyInsurance.WebApi/obj

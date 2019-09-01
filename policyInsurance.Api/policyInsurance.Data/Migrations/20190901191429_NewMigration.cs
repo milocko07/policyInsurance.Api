@@ -49,6 +49,46 @@ namespace policyInsurance.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Client",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 60, nullable: false),
+                    LastName = table.Column<string>(maxLength: 60, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Client", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PolicyRisk",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 60, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PolicyRisk", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PolicyType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 60, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PolicyType", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -154,6 +194,71 @@ namespace policyInsurance.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Policy",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 60, nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    Opening = table.Column<DateTime>(nullable: false),
+                    Coverage = table.Column<decimal>(type: "decimal(5, 2)", nullable: false),
+                    TimeCoverage = table.Column<int>(nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    TypeId = table.Column<int>(nullable: true),
+                    RiskId = table.Column<int>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Policy", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Policy_PolicyRisk_RiskId",
+                        column: x => x.RiskId,
+                        principalTable: "PolicyRisk",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Policy_PolicyType_TypeId",
+                        column: x => x.TypeId,
+                        principalTable: "PolicyType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Policy_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PolicyClient",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PolicyId = table.Column<int>(nullable: false),
+                    ClientId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PolicyClient", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PolicyClient_Client_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Client",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PolicyClient_Policy_PolicyId",
+                        column: x => x.PolicyId,
+                        principalTable: "Policy",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -192,6 +297,31 @@ namespace policyInsurance.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Policy_RiskId",
+                table: "Policy",
+                column: "RiskId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Policy_TypeId",
+                table: "Policy",
+                column: "TypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Policy_UserId",
+                table: "Policy",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PolicyClient_ClientId",
+                table: "PolicyClient",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PolicyClient_PolicyId",
+                table: "PolicyClient",
+                column: "PolicyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -212,7 +342,22 @@ namespace policyInsurance.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "PolicyClient");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Client");
+
+            migrationBuilder.DropTable(
+                name: "Policy");
+
+            migrationBuilder.DropTable(
+                name: "PolicyRisk");
+
+            migrationBuilder.DropTable(
+                name: "PolicyType");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

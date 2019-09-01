@@ -10,7 +10,7 @@ using policyInsurance.Data.Repositories;
 namespace policyInsurance.Data.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20190901003200_NewMigration")]
+    [Migration("20190901191429_NewMigration")]
     partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -105,6 +105,113 @@ namespace policyInsurance.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("policyInsurance.Data.Models.Client.Client", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(60);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(60);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Client");
+                });
+
+            modelBuilder.Entity("policyInsurance.Data.Models.Policy.Policy", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Coverage")
+                        .HasColumnType("decimal(5, 2)");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(60);
+
+                    b.Property<DateTime>("Opening");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int?>("RiskId");
+
+                    b.Property<int>("TimeCoverage");
+
+                    b.Property<int?>("TypeId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RiskId");
+
+                    b.HasIndex("TypeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Policy");
+                });
+
+            modelBuilder.Entity("policyInsurance.Data.Models.Policy.PolicyClient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClientId");
+
+                    b.Property<int>("PolicyId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("PolicyId");
+
+                    b.ToTable("PolicyClient");
+                });
+
+            modelBuilder.Entity("policyInsurance.Data.Models.Policy.PolicyRisk", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(60);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PolicyRisk");
+                });
+
+            modelBuilder.Entity("policyInsurance.Data.Models.Policy.PolicyType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(60);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PolicyType");
                 });
 
             modelBuilder.Entity("policyInsurance.Data.Models.Security.AppIdentityRole", b =>
@@ -226,6 +333,34 @@ namespace policyInsurance.Data.Migrations
                     b.HasOne("policyInsurance.Data.Models.Security.AppIdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("policyInsurance.Data.Models.Policy.Policy", b =>
+                {
+                    b.HasOne("policyInsurance.Data.Models.Policy.PolicyRisk", "Risk")
+                        .WithMany("Policies")
+                        .HasForeignKey("RiskId");
+
+                    b.HasOne("policyInsurance.Data.Models.Policy.PolicyType", "Type")
+                        .WithMany("Policies")
+                        .HasForeignKey("TypeId");
+
+                    b.HasOne("policyInsurance.Data.Models.Security.AppIdentityUser", "User")
+                        .WithMany("Policies")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("policyInsurance.Data.Models.Policy.PolicyClient", b =>
+                {
+                    b.HasOne("policyInsurance.Data.Models.Client.Client", "Client")
+                        .WithMany("PolicyClients")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("policyInsurance.Data.Models.Policy.Policy", "Policy")
+                        .WithMany("PolicyClients")
+                        .HasForeignKey("PolicyId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
