@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using policyInsurance.Data;
@@ -30,8 +31,7 @@ namespace policyInsurance.WebApi.Controllers
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        //[EnableCors("CorsPolicy")]
-        [Route("Login")]
+        [EnableCors("CorsPolicy")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginViewModel model)
         {
             if (model == null)
