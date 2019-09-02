@@ -17,7 +17,8 @@ namespace policyInsurance.Data.Access
         public Task Delete(int id)
         {
             unitofWork.PolicyRepository.Delete(id);
-            return unitofWork.SaveAsync();
+            unitofWork.Save();
+            return Task.FromResult("");
         }
     }
 }

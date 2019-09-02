@@ -4,7 +4,7 @@ namespace policyInsurance.Entities.ViewModels
 {
     public class PolicySelectionViewModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public string Name { get; set; }
 
