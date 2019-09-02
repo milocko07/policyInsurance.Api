@@ -29,12 +29,12 @@ namespace policyInsurance.Data.Models.Policy
 
         public Decimal Price { get; set; }
 
-        public PolicyType Type { get; set; }
+        public virtual PolicyType Type { get; set; }
 
-        public PolicyRisk Risk { get; set; }
+        public virtual PolicyRisk Risk { get; set; }
 
         public virtual AppIdentityUser User { get; set; }
 
-        public ICollection<PolicyClient> PolicyClients { get; set; }
+        public virtual ICollection<PolicyClient> PolicyClients { get; set; }
     }
 }

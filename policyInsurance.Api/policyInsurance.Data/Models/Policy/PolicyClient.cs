@@ -6,8 +6,8 @@ namespace policyInsurance.Data.Models.Policy
     {
         public int Id { get; set; }
         public int PolicyId { get; set; }
-        public Policy Policy { get; set; }
+        public virtual Policy Policy { get; set; }
         public int ClientId { get; set; }
-        public ClientAlias.Client Client { get; set; }
+        public virtual ClientAlias.Client Client { get; set; }
     }
 }

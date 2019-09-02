@@ -1,9 +1,9 @@
 ﻿using policyInsurance.Entities.ViewModels;
 using System.Threading.Tasks;
 
-namespace policyInsurance.Access
+namespace policyInsurance.Data.Access
 {
-    interface IAccessSecurty
+    public interface IAccessSecurty
     {
         Task<SecurityViewModel> Login(string userName, string passWord);
     }

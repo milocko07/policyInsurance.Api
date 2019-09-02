@@ -16,6 +16,6 @@ namespace policyInsurance.Data.Models.Client
         [StringLength(60)]
         public string LastName { get; set; }
 
-        public ICollection<PolicyClient> PolicyClients { get; set; }
+        public virtual ICollection<PolicyClient> PolicyClients { get; set; }
     }
 }

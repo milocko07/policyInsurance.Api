@@ -20,8 +20,7 @@ namespace policyInsurance.WebApi.Controllers
     [ApiController]
     public class SecurityController : Controller
     {
-        private AccessSecurity accessSecurity;
-        private UnitOfWork unitOfWork;
+        private IAccessSecurty accessSecurity;
 
         public SecurityController(
            UserManager<AppIdentityUser> userManager, RoleManager<AppIdentityRole> rolesManager, AppIdentityDbContext context)

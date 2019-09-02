@@ -1,4 +1,5 @@
-﻿using policyInsurance.Data.Models.Security;
+﻿using policyInsurance.Data.Models.Policy;
+using policyInsurance.Data.Models.Security;
 using policyInsurance.Data.Repositories;
 
 namespace policyInsurance.Data
@@ -11,6 +12,7 @@ namespace policyInsurance.Data
         private GenericRepository<AppIdentityUser> _identityUserRepository;
         private GenericRepository<AppIdentityRole> _identityRoleRepository;
         private GenericRepository<AppIdentityUserRoles> _identityUserRolesRepository;
+        private GenericRepository<Policy> _policyRepository;
 
         public UnitOfWork(AppIdentityDbContext _context)
         {
@@ -38,6 +40,14 @@ namespace policyInsurance.Data
             get
             {
                 return _identityUserRolesRepository = _identityUserRolesRepository ?? new GenericRepository<AppIdentityUserRoles>(_identityContext);
+            }
+        }
+
+        public GenericRepository<Policy> PolicyRepository
+        {
+            get
+            {
+                return _policyRepository = _policyRepository ?? new GenericRepository<Policy>(_identityContext);
             }
         }
 
