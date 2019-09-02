@@ -13,6 +13,8 @@ namespace policyInsurance.Data
         private GenericRepository<AppIdentityRole> _identityRoleRepository;
         private GenericRepository<AppIdentityUserRoles> _identityUserRolesRepository;
         private GenericRepository<Policy> _policyRepository;
+        private GenericRepository<PolicyType> _policyTypeRepository;
+        private GenericRepository<PolicyRisk> _policyRiskRepository;
 
         public UnitOfWork(AppIdentityDbContext _context)
         {
@@ -48,6 +50,22 @@ namespace policyInsurance.Data
             get
             {
                 return _policyRepository = _policyRepository ?? new GenericRepository<Policy>(_identityContext);
+            }
+        }
+
+        public GenericRepository<PolicyType> PolicyTypeRepository
+        {
+            get
+            {
+                return _policyTypeRepository = _policyTypeRepository ?? new GenericRepository<PolicyType>(_identityContext);
+            }
+        }
+
+        public GenericRepository<PolicyRisk> PolicyRiskRepository
+        {
+            get
+            {
+                return _policyRiskRepository = _policyRiskRepository ?? new GenericRepository<PolicyRisk>(_identityContext);
             }
         }
 

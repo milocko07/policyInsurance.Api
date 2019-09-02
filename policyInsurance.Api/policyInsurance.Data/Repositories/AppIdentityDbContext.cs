@@ -12,9 +12,5 @@ namespace policyInsurance.Data.Repositories
         { }
 
         public DbSet<Policy> Policy { get; set; }
-
-
-        public DbSet<PolicyType> PolicyType { get; set; }
-
     }
 }

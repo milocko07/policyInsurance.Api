@@ -77,5 +77,10 @@ namespace policyInsurance.Data.Repositories
             dbSet.Attach(entityToUpdate);
             context.Entry(entityToUpdate).State = EntityState.Modified;
         }
+
+        public virtual int Save()
+        {
+            return context.SaveChanges();
+        }
     }
 }
