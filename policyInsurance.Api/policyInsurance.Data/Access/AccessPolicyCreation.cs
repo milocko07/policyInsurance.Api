@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using policyInsurance.Data.Models.Policy;
+﻿using policyInsurance.Data.Models.Policy;
 using policyInsurance.Entities.ViewModels;
+using System.Threading.Tasks;
 
 namespace policyInsurance.Data.Access
 {
@@ -16,7 +13,7 @@ namespace policyInsurance.Data.Access
             this.unitofWork = unitWork;
         }
 
-        public Task<string> Save(PolicySelectionViewModel model)
+        public Task<string> Create(PolicySelectionViewModel model)
         {
             Policy newPolicy = new Policy();
             newPolicy.Name = model.Name;
@@ -32,7 +29,7 @@ namespace policyInsurance.Data.Access
 
             if (result <= 0)
             {
-                return Task.FromResult("Error saving");
+                return Task.FromResult("Error creating");
             }
             else
             {

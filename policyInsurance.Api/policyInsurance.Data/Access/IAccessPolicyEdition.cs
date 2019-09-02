@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace policyInsurance.Data.Access
 {
-    public interface IAccessPolicyCreation
+    public interface IAccessPolicyEdition
     {
-        Task<string> Create(PolicySelectionViewModel model);
+        Task<string> Update(PolicySelectionViewModel model);
     }
 }

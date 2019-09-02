@@ -15,11 +15,15 @@ namespace policyInsurance.WebApi.Controllers
     {
         private IAccessPolicySelection accessPolicySelection;
         private IAccessPolicyCreation accessPolicyCreation;
+        private IAccessPolicyEdition accessPolicyEdition;
+        private IAccessPolicyDeletion accessPolicyDeletion;
 
         public PolicyController(AppIdentityDbContext context)
         {
             this.accessPolicySelection = new AccessPolicySelection(new UnitOfWork(context));
             this.accessPolicyCreation = new AccessPolicyCreation(new UnitOfWork(context));
+            this.accessPolicyEdition = new AccessPolicyEdition(new UnitOfWork(context));
+            this.accessPolicyDeletion = new AccessPolicyDeletion(new UnitOfWork(context));
         }
 
         [HttpGet()]
@@ -45,22 +49,88 @@ namespace policyInsurance.WebApi.Controllers
         [HttpPost]
         //[ValidateAntiForgeryToken]
         [EnableCors("CorsPolicy")]
-        public async Task<IActionResult> Save([FromBody] PolicySelectionViewModel model)
+        public async Task<IActionResult> Create([FromBody] PolicySelectionViewModel model)
         {
-            if (model == null)
+            try
             {
-                return BadRequest("Invalid client request");
-            }
+                if (model == null)
+                {
+                    return BadRequest("Invalid client request");
+                }
 
-            var result = accessPolicyCreation.Save(model);
+                var result = accessPolicyCreation.Create(model);
 
-            if (result == null)
-            {
-                return Ok();
+                if (result == null)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
-            else
+            catch (System.Exception)
             {
-                return NotFound();
+                throw;
+            }
+        }
+
+        [HttpPut]
+        //[ValidateAntiForgeryToken]
+        [EnableCors("CorsPolicy")]
+        public async Task<IActionResult> Update([FromBody] PolicySelectionViewModel model)
+        {
+            try
+            {
+                if (model == null)
+                {
+                    return BadRequest("Invalid client request");
+                }
+
+                var result = accessPolicyEdition.Update(model);
+
+                if (result == null)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpDelete]
+        //[ValidateAntiForgeryToken]
+        [EnableCors("CorsPolicy")]
+        public async Task<IActionResult> Delete([FromBody] int id)
+        {
+            try
+            {
+                if (id <= 0)
+                {
+                    return BadRequest("Invalid client request");
+                }
+
+
+                var result = accessPolicyDeletion.Delete(id);
+
+                if (result != null)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
             }
         }
     }

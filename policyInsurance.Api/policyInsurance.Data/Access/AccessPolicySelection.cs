@@ -32,7 +32,9 @@ namespace policyInsurance.Data.Access
                         Coverage = policy.Coverage,
                         TimeCoverage = policy.TimeCoverage,
                         Price = policy.Price,
+                        TypeId = policy.Type.Id,
                         Type = policy.Type.Name,
+                        RiskId = policy.Risk.Id,
                         Risk = policy.Risk.Name,
                     });
                 }

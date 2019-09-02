@@ -5,6 +5,7 @@ namespace policyInsurance.Entities.ViewModels
     public class PolicySelectionViewModel
     {
         public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -17,7 +18,11 @@ namespace policyInsurance.Entities.ViewModels
 
         public Decimal Price { get; set; }
 
+        public int TypeId { get; set; }
+
         public string Type { get; set; }
+
+        public int RiskId { get; set; }
 
         public string Risk { get; set; }
     }

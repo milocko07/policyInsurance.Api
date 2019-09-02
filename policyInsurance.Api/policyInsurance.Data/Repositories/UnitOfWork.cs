@@ -1,6 +1,7 @@
 ﻿using policyInsurance.Data.Models.Policy;
 using policyInsurance.Data.Models.Security;
 using policyInsurance.Data.Repositories;
+using System.Threading.Tasks;
 
 namespace policyInsurance.Data
 {
@@ -72,6 +73,11 @@ namespace policyInsurance.Data
         public void Save()
         {
             _identityContext.SaveChanges();
+        }
+
+        public Task SaveAsync()
+        {
+            return _identityContext.SaveChangesAsync();
         }
     }
 }
