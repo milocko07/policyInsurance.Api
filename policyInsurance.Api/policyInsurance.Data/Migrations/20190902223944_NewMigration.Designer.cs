@@ -10,7 +10,7 @@ using policyInsurance.Data.Repositories;
 namespace policyInsurance.Data.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20190901191429_NewMigration")]
+    [Migration("20190902223944_NewMigration")]
     partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

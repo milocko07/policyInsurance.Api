@@ -4,7 +4,6 @@ using policyInsurance.Data;
 using policyInsurance.Data.Access;
 using policyInsurance.Data.Repositories;
 using policyInsurance.Entities.ViewModels;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace policyInsurance.WebApi.Controllers

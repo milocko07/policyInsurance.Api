@@ -13,3 +13,5 @@
 /policyInsurance.Api/policyInsurance.Entities/obj
 /policyInsurance.Api/policyInsurance.WebApi/bin/Debug/netcoreapp2.2
 /policyInsurance.Api/policyInsurance.WebApi/obj
+/policyInsurance.Api/policyInsurance.Tests/bin/Debug/netcoreapp2.2
+/policyInsurance.Api/policyInsurance.Tests/obj

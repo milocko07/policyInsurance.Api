@@ -15,7 +15,7 @@ namespace policyInsurance.Data.Access
             this.unitofWork = unitWork;
         }
 
-        Task<IEnumerable<PolicySelectionViewModel>> IAccessPolicySelection.Get()
+        public Task<IEnumerable<PolicySelectionViewModel>> Get()
         {
             List<Policy> listPolicies = unitofWork.PolicyRepository.Get(null, null, "Type,Risk") as List<Policy>;
             List<PolicySelectionViewModel> listPoliciesSelectionViewModel = new List<PolicySelectionViewModel>();
