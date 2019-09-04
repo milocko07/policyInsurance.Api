@@ -21,7 +21,6 @@ namespace policyInsurance.WebApi.Controllers
     {
         private readonly ISecurityService _securityService;
 
-
         public SecurityController(
            UserManager<AppIdentityUser> userManager, RoleManager<AppIdentityRole> rolesManager, AppIdentityDbContext context, ISecurityService securityService)
         {

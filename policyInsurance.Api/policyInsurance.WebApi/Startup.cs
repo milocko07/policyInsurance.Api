@@ -10,6 +10,7 @@ using policyInsurance.Data;
 using policyInsurance.Data.Access;
 using policyInsurance.Data.Models.Security;
 using policyInsurance.Data.Repositories;
+using policyInsurance.Services.Policy;
 using policyInsurance.Services.Security;
 using System;
 
@@ -30,9 +31,15 @@ namespace policyInsurance.WebApi
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(configuration["policyInsuranceConnectionTest"], x => x.MigrationsAssembly("policyInsurance.Data")));
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ISecurityService, SecurityService>();
+            services.AddScoped<IPolicyService, PolicyService>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAccessSecurty, AccessSecurity>();
+            services.AddScoped<IAccessPolicySelection, AccessPolicySelection>();
+            services.AddScoped<IAccessPolicyCreation, AccessPolicyCreation>();
+            services.AddScoped<IAccessPolicyEdition, AccessPolicyEdition>();
+            services.AddScoped<IAccessPolicyDeletion, AccessPolicyDeletion>();
 
             services.AddIdentity<AppIdentityUser, AppIdentityRole>()
                     .AddEntityFrameworkStores<AppIdentityDbContext>()

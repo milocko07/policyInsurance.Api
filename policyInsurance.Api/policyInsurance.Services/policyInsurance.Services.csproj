@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Policy\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\policyInsurance.Data\policyInsurance.Data.csproj" />
     <ProjectReference Include="..\policyInsurance.Entities\policyInsurance.Entities.csproj" />
   </ItemGroup>

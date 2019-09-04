@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using policyInsurance.Data;
 using policyInsurance.Data.Access;
 using policyInsurance.Data.Repositories;
 using policyInsurance.Entities.ViewModels;
+using policyInsurance.Services.Policy;
 using System.Threading.Tasks;
 
 namespace policyInsurance.WebApi.Controllers
@@ -12,17 +12,11 @@ namespace policyInsurance.WebApi.Controllers
     [ApiController]
     public class PolicyController : Controller
     {
-        private IAccessPolicySelection accessPolicySelection;
-        private IAccessPolicyCreation accessPolicyCreation;
-        private IAccessPolicyEdition accessPolicyEdition;
-        private IAccessPolicyDeletion accessPolicyDeletion;
+        private readonly IPolicyService _policyService;
 
-        public PolicyController(AppIdentityDbContext context)
+        public PolicyController(IPolicyService policyService)
         {
-            this.accessPolicySelection = new AccessPolicySelection(new UnitOfWork(context));
-            this.accessPolicyCreation = new AccessPolicyCreation(new UnitOfWork(context));
-            this.accessPolicyEdition = new AccessPolicyEdition(new UnitOfWork(context));
-            this.accessPolicyDeletion = new AccessPolicyDeletion(new UnitOfWork(context));
+            this._policyService = policyService;
         }
 
         [HttpGet()]
@@ -35,7 +29,7 @@ namespace policyInsurance.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var policies = await accessPolicySelection.Get();
+            var policies = await _policyService.Get();
 
             if (policies == null)
             {
@@ -57,7 +51,7 @@ namespace policyInsurance.WebApi.Controllers
                     return BadRequest("Invalid client request");
                 }
 
-                var result = accessPolicyCreation.Create(model);
+                var result = _policyService.Create(model);
 
                 if (result == null)
                 {
@@ -86,7 +80,7 @@ namespace policyInsurance.WebApi.Controllers
                     return BadRequest("Invalid client request");
                 }
 
-                var result = accessPolicyEdition.Update(model);
+                var result = _policyService.Update(model);
 
                 if (result == null)
                 {
@@ -116,7 +110,7 @@ namespace policyInsurance.WebApi.Controllers
                 }
 
 
-                var result = accessPolicyDeletion.Delete(id);
+                var result = _policyService.Delete(id);
 
                 if (result != null)
                 {
