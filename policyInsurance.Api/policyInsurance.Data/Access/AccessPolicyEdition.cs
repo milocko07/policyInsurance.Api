@@ -1,4 +1,5 @@
 ﻿using policyInsurance.Data.Models.Policy;
+using policyInsurance.Data.Repositories;
 using policyInsurance.Entities.ViewModels;
 using System.Threading.Tasks;
 
@@ -6,9 +7,9 @@ namespace policyInsurance.Data.Access
 {
     public class AccessPolicyEdition : IAccessPolicyEdition
     {
-        UnitOfWork unitofWork;
+        IUnitOfWork unitofWork;
 
-        public AccessPolicyEdition(UnitOfWork unitWork)
+        public AccessPolicyEdition(IUnitOfWork unitWork)
         {
             this.unitofWork = unitWork;
         }

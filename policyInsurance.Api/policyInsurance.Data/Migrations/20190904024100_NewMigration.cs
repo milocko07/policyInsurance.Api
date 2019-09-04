@@ -155,7 +155,8 @@ namespace policyInsurance.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
+                    RoleId = table.Column<string>(nullable: false),
+                    Discriminator = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -258,6 +259,56 @@ namespace policyInsurance.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "1", null, "policies", null },
+                    { "2", null, "assignments", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Age", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "1", 0, 31, "7be6301c-6deb-4ad6-8347-bcc51613e34a", "user01@email.com", false, false, null, null, null, "123", "1234567", false, null, false, "User 01" });
+
+            migrationBuilder.InsertData(
+                table: "Client",
+                columns: new[] { "Id", "LastName", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Client Lastname 01", "Client 01" },
+                    { 2, "Client Lastname 02", "Client 02" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "PolicyRisk",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Low" },
+                    { 2, "Medium" },
+                    { 3, "Medium-High" },
+                    { 4, "High" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "PolicyType",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Earthquake" },
+                    { 2, "Fire" },
+                    { 3, "Robbery" },
+                    { 4, "Lost" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "UserId", "RoleId", "Discriminator" },
+                values: new object[] { "1", "1", "AppIdentityUserRoles" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

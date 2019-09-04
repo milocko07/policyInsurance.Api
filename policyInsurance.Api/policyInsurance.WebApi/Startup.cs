@@ -7,8 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using policyInsurance.Data;
+using policyInsurance.Data.Access;
 using policyInsurance.Data.Models.Security;
 using policyInsurance.Data.Repositories;
+using policyInsurance.Services.Security;
 using System;
 
 namespace policyInsurance.WebApi
@@ -28,7 +30,9 @@ namespace policyInsurance.WebApi
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(configuration["policyInsuranceConnectionTest"], x => x.MigrationsAssembly("policyInsurance.Data")));
 
-            services.AddSingleton<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ISecurityService, SecurityService>();
+            services.AddScoped<IAccessSecurty, AccessSecurity>();
 
             services.AddIdentity<AppIdentityUser, AppIdentityRole>()
                     .AddEntityFrameworkStores<AppIdentityDbContext>()

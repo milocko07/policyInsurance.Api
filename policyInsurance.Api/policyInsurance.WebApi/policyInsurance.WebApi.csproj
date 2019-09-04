@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\policyInsurance.Data\policyInsurance.Data.csproj" />
+    <ProjectReference Include="..\policyInsurance.Services\policyInsurance.Services.csproj" />
   </ItemGroup>
 
 </Project>

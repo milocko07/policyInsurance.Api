@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using policyInsurance.Data.Repositories;
 using System.Threading.Tasks;
 
 namespace policyInsurance.Data.Access
 {
     public class AccessPolicyDeletion : IAccessPolicyDeletion
     {
-        UnitOfWork unitofWork;
+        IUnitOfWork unitofWork;
 
-        public AccessPolicyDeletion(UnitOfWork unitWork)
+        public AccessPolicyDeletion(IUnitOfWork unitWork)
         {
             this.unitofWork = unitWork;
         }

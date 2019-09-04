@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using policyInsurance.Data.Models.Security;
+using policyInsurance.Data.Repositories;
 using policyInsurance.Entities.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ namespace policyInsurance.Data.Access
     {
         UserManager<AppIdentityUser> userManager;
         RoleManager<AppIdentityRole> rolesManager;
-        UnitOfWork unitofWork;
+        IUnitOfWork unitofWork;
 
-        public AccessSecurity(UserManager<AppIdentityUser> userManager, RoleManager<AppIdentityRole> rolesManager, UnitOfWork unitWork)
+        public AccessSecurity(UserManager<AppIdentityUser> userManager, RoleManager<AppIdentityRole> rolesManager, IUnitOfWork unitWork)
         {
             this.userManager = userManager;
             this.rolesManager = rolesManager;

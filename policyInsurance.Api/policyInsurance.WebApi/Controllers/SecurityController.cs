@@ -2,11 +2,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using policyInsurance.Data;
-using policyInsurance.Data.Access;
 using policyInsurance.Data.Models.Security;
 using policyInsurance.Data.Repositories;
 using policyInsurance.Entities.ViewModels;
+using policyInsurance.Services.Security;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -20,12 +19,13 @@ namespace policyInsurance.WebApi.Controllers
     [ApiController]
     public class SecurityController : Controller
     {
-        private IAccessSecurty accessSecurity;
+        private readonly ISecurityService _securityService;
+
 
         public SecurityController(
-           UserManager<AppIdentityUser> userManager, RoleManager<AppIdentityRole> rolesManager, AppIdentityDbContext context)
+           UserManager<AppIdentityUser> userManager, RoleManager<AppIdentityRole> rolesManager, AppIdentityDbContext context, ISecurityService securityService)
         {
-            this.accessSecurity = new AccessSecurity(userManager, rolesManager, new UnitOfWork(context));
+            _securityService = securityService;
         }
 
         [HttpPost]
@@ -42,7 +42,7 @@ namespace policyInsurance.WebApi.Controllers
                 return View(model);
 
 
-            var securityViewModel = await this.accessSecurity.Login(model.Username, model.Password);
+            var securityViewModel = await this._securityService.Login(model.Username, model.Password);
 
             if (securityViewModel != null)
             {

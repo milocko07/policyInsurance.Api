@@ -10,7 +10,7 @@ using policyInsurance.Data.Repositories;
 namespace policyInsurance.Data.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20190902223944_NewMigration")]
+    [Migration("20190904024100_NewMigration")]
     partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,11 +85,16 @@ namespace policyInsurance.Data.Migrations
 
                     b.Property<string>("RoleId");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserRole<string>");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -124,6 +129,20 @@ namespace policyInsurance.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Client");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            LastName = "Client Lastname 01",
+                            Name = "Client 01"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            LastName = "Client Lastname 02",
+                            Name = "Client 02"
+                        });
                 });
 
             modelBuilder.Entity("policyInsurance.Data.Models.Policy.Policy", b =>
@@ -197,6 +216,28 @@ namespace policyInsurance.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PolicyRisk");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Low"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Medium"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Medium-High"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "High"
+                        });
                 });
 
             modelBuilder.Entity("policyInsurance.Data.Models.Policy.PolicyType", b =>
@@ -212,6 +253,28 @@ namespace policyInsurance.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PolicyType");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Earthquake"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Fire"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Robbery"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Lost"
+                        });
                 });
 
             modelBuilder.Entity("policyInsurance.Data.Models.Security.AppIdentityRole", b =>
@@ -236,6 +299,18 @@ namespace policyInsurance.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Name = "policies"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            Name = "assignments"
+                        });
                 });
 
             modelBuilder.Entity("policyInsurance.Data.Models.Security.AppIdentityUser", b =>
@@ -289,6 +364,37 @@ namespace policyInsurance.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            Age = 31,
+                            ConcurrencyStamp = "7be6301c-6deb-4ad6-8347-bcc51613e34a",
+                            Email = "user01@email.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "123",
+                            PhoneNumber = "1234567",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "User 01"
+                        });
+                });
+
+            modelBuilder.Entity("policyInsurance.Data.Models.Security.AppIdentityUserRoles", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<string>");
+
+                    b.HasDiscriminator().HasValue("AppIdentityUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1",
+                            RoleId = "1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

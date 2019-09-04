@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "policyInsurance.WebApi", "p
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "policyInsurance.Entities", "policyInsurance.Entities\policyInsurance.Entities.csproj", "{9C4746FA-D1D4-415E-9C11-DDAE9395377C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "policyInsurance.Tests", "policyInsurance.Tests\policyInsurance.Tests.csproj", "{343036A7-6D9D-4DEB-ADEA-198A90EF10BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "policyInsurance.Tests", "policyInsurance.Tests\policyInsurance.Tests.csproj", "{343036A7-6D9D-4DEB-ADEA-198A90EF10BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "policyInsurance.Services", "policyInsurance.Services\policyInsurance.Services.csproj", "{458883B8-0D36-4D29-8A03-AC62FDAF695C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{343036A7-6D9D-4DEB-ADEA-198A90EF10BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{343036A7-6D9D-4DEB-ADEA-198A90EF10BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{343036A7-6D9D-4DEB-ADEA-198A90EF10BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{458883B8-0D36-4D29-8A03-AC62FDAF695C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{458883B8-0D36-4D29-8A03-AC62FDAF695C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{458883B8-0D36-4D29-8A03-AC62FDAF695C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{458883B8-0D36-4D29-8A03-AC62FDAF695C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

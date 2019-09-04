@@ -3,7 +3,7 @@ using policyInsurance.Data.Models.Security;
 using policyInsurance.Data.Repositories;
 using System.Threading.Tasks;
 
-namespace policyInsurance.Data
+namespace policyInsurance.Data.Repositories
 {
 
     public class UnitOfWork : IUnitOfWork
