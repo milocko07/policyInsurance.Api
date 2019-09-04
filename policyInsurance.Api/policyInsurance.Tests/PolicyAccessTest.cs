@@ -6,7 +6,6 @@ using Moq;
 using policyInsurance.Data.Access;
 using policyInsurance.Data.Models.Policy;
 using policyInsurance.Data.Models.Security;
-using policyInsurance.Data.Repositories;
 using policyInsurance.Entities.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +15,7 @@ using Xunit;
 namespace policyInsurance.Tests
 {
     [TestClass]
-    public class PolicyTests
+    public class PolicyAcessTests
     {
         public static Mock<DbSet<T>> CreateDbSetMock<T>(IEnumerable<T> elements) where T : class
         {
@@ -103,14 +102,13 @@ namespace policyInsurance.Tests
             var listRoles = new List<IdentityRole>();
             listRoles.Add(role);
 
-            var usersMock = CreateDbSetMock(listUsers);
+            //var usersMock = CreateDbSetMock(listUsers);
 
-            var options = new DbContextOptionsBuilder<AppIdentityDbContext>()
-                            .Options;
+            //var options = new DbContextOptionsBuilder<AppIdentityDbContext>()
+            //                .Options;
 
-
-            var userContextMock = new Mock<AppIdentityDbContext>(options);
-            userContextMock.Setup(x => x.Users).Returns(usersMock.Object);
+            //var userContextMock = new Mock<AppIdentityDbContext>(options);
+            //userContextMock.Setup(x => x.Users).Returns(usersMock.Object);
         }
 
         [Fact]
@@ -122,10 +120,10 @@ namespace policyInsurance.Tests
             var listPolicies = new List<Policy>();
             listPolicies.Add(policy);
 
-            var policyMock = CreateDbSetMock(listPolicies);
+            //var policyMock = CreateDbSetMock(listPolicies);
 
-            var policyContextMock = new Mock<AppIdentityDbContext>();
-            policyContextMock.Setup(x => x.Policy).Returns(policyMock.Object);
+            //var policyContextMock = new Mock<AppIdentityDbContext>();
+            //policyContextMock.Setup(x => x.Policy).Returns(policyMock.Object);
         }
     }
 }

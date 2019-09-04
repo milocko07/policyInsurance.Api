@@ -23,7 +23,14 @@ namespace policyInsurance.Services.Policy
 
         public Task<IEnumerable<PolicySelectionViewModel>> Get()
         {
-            return _accessPolicySelection.Get();
+            try
+            {
+                return _accessPolicySelection.Get();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public Task<string> Create(PolicySelectionViewModel model)
