@@ -44,28 +44,12 @@ namespace policyInsurance.WebApi.Controllers
         [EnableCors("CorsPolicy")]
         public async Task<IActionResult> Create([FromBody] PolicySelectionViewModel model)
         {
-            try
+            if (model == null)
             {
-                if (model == null)
-                {
-                    return BadRequest("Invalid client request");
-                }
-
-                var result = _policyService.Create(model);
-
-                if (result == null)
-                {
-                    return Ok();
-                }
-                else
-                {
-                    return NotFound();
-                }
+                return BadRequest("Invalid client request");
             }
-            catch (System.Exception)
-            {
-                throw;
-            }
+
+            return Ok(await _policyService.Create(model));
         }
 
         [HttpPut]

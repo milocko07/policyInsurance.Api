@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace policyInsurance.Data.Models.Client
+namespace policyInsurance.Data.Models.Clients
 {
     public class Client
     {

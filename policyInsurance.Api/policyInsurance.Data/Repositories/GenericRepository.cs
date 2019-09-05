@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace policyInsurance.Data.Repositories
 {
@@ -50,6 +51,11 @@ namespace policyInsurance.Data.Repositories
             return dbSet.Find(id);
         }
 
+        public virtual async Task<TEntity> GetByIDAsync(object id)
+        {
+            return await dbSet.FindAsync(id);
+        }
+
         public virtual void Insert(TEntity entity)
         {
             dbSet.Add(entity);
@@ -79,6 +85,11 @@ namespace policyInsurance.Data.Repositories
         public virtual int Save()
         {
             return context.SaveChanges();
+        }
+
+        public virtual Task<int> SaveAsync()
+        {
+            return context.SaveChangesAsync();
         }
     }
 }

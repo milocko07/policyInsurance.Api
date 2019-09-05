@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using policyInsurance.Data.Models.Client;
+using policyInsurance.Data.Models.Clients;
 using policyInsurance.Data.Models.Policy;
 using policyInsurance.Data.Models.Security;
 
@@ -24,7 +23,7 @@ namespace policyInsurance.Data.Repositories
 
             modelBuilder.Entity<AppIdentityRole>().HasData(
              new AppIdentityRole() { Id = "1", Name = "policies", NormalizedName = null, ConcurrencyStamp = null },
-             new AppIdentityRole() { Id = "2", Name = "assignments", NormalizedName = null, ConcurrencyStamp = null },
+             new AppIdentityRole() { Id = "2", Name = "policies/assigments", NormalizedName = null, ConcurrencyStamp = null },
              new AppIdentityRole() { Id = "3", Name = "test", NormalizedName = null, ConcurrencyStamp = null }
              );
 

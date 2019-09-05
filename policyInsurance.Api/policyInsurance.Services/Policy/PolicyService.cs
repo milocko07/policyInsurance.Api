@@ -35,7 +35,14 @@ namespace policyInsurance.Services.Policy
 
         public Task<string> Create(PolicySelectionViewModel model)
         {
-            return _accessPolicyCreation.Create(model);
+            try
+            {
+                return _accessPolicyCreation.Create(model);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public Task<string> Update(PolicySelectionViewModel model)

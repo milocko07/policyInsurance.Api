@@ -1,4 +1,4 @@
-﻿using ClientAlias = policyInsurance.Data.Models.Client;
+﻿using policyInsurance.Data.Models.Clients;
 
 namespace policyInsurance.Data.Models.Policy
 {
@@ -8,6 +8,6 @@ namespace policyInsurance.Data.Models.Policy
         public int PolicyId { get; set; }
         public virtual Policy Policy { get; set; }
         public int ClientId { get; set; }
-        public virtual ClientAlias.Client Client { get; set; }
+        public virtual Client Client { get; set; }
     }
 }

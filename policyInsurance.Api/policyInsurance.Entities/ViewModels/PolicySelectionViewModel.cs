@@ -25,5 +25,7 @@ namespace policyInsurance.Entities.ViewModels
         public int RiskId { get; set; }
 
         public string Risk { get; set; }
+
+        public string ClientsAssigned { get; set; }
     }
 }

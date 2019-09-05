@@ -40,7 +40,7 @@ namespace policyInsurance.Data.Access
                     {
                         menuList.Add(new MenuViewModel
                         {
-                            name = role,
+                            name = role.Split("/").Count() == 2 ? role.Split("/")[1] : role,
                             url = "/" + role,
                             icon = "icon-speedometer",
                         });

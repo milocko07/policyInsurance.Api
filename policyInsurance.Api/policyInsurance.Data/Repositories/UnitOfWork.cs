@@ -1,6 +1,6 @@
-﻿using policyInsurance.Data.Models.Policy;
+﻿using policyInsurance.Data.Models.Clients;
+using policyInsurance.Data.Models.Policy;
 using policyInsurance.Data.Models.Security;
-using policyInsurance.Data.Repositories;
 using System.Threading.Tasks;
 
 namespace policyInsurance.Data.Repositories
@@ -16,6 +16,8 @@ namespace policyInsurance.Data.Repositories
         private GenericRepository<Policy> _policyRepository;
         private GenericRepository<PolicyType> _policyTypeRepository;
         private GenericRepository<PolicyRisk> _policyRiskRepository;
+        private GenericRepository<Client> _clientRepository;
+        private GenericRepository<PolicyClient> _policyClientRepository;
 
         public UnitOfWork(AppIdentityDbContext _context)
         {
@@ -67,6 +69,22 @@ namespace policyInsurance.Data.Repositories
             get
             {
                 return _policyRiskRepository = _policyRiskRepository ?? new GenericRepository<PolicyRisk>(_identityContext);
+            }
+        }
+
+        public GenericRepository<Client> ClientRepository
+        {
+            get
+            {
+                return _clientRepository = _clientRepository ?? new GenericRepository<Client>(_identityContext);
+            }
+        }
+
+        public GenericRepository<PolicyClient> PolicyClientRepository
+        {
+            get
+            {
+                return _policyClientRepository = _policyClientRepository ?? new GenericRepository<PolicyClient>(_identityContext);
             }
         }
 

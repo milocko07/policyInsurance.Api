@@ -12,6 +12,7 @@ using policyInsurance.Data.Models.Security;
 using policyInsurance.Data.Repositories;
 using policyInsurance.Services.Policy;
 using policyInsurance.Services.Security;
+using policyInsurance.WebApi.Filters;
 using System;
 
 namespace policyInsurance.WebApi
@@ -33,6 +34,7 @@ namespace policyInsurance.WebApi
 
             services.AddScoped<ISecurityService, SecurityService>();
             services.AddScoped<IPolicyService, PolicyService>();
+            services.AddScoped<IPolicyAssigmentService, PolicyAssigmentService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAccessSecurty, AccessSecurity>();
@@ -40,6 +42,8 @@ namespace policyInsurance.WebApi
             services.AddScoped<IAccessPolicyCreation, AccessPolicyCreation>();
             services.AddScoped<IAccessPolicyEdition, AccessPolicyEdition>();
             services.AddScoped<IAccessPolicyDeletion, AccessPolicyDeletion>();
+
+            services.AddScoped<IAccessPolicyAssigment, AccessPolicyAssigment>();
 
             services.AddIdentity<AppIdentityUser, AppIdentityRole>()
                     .AddEntityFrameworkStores<AppIdentityDbContext>()
@@ -89,7 +93,9 @@ namespace policyInsurance.WebApi
                 };
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options => {
+                options.Filters.Add(new ExceptionFilter());
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDistributedMemoryCache();
             services.AddSession();
